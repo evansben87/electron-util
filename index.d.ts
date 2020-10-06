@@ -1,9 +1,19 @@
+// @ts-ignore
 /// <reference lib="dom"/>
 /// <reference types="electron"/>
 /// <reference types="node"/>
-import {AllElectron, Remote, BrowserWindow, Size, Rectangle, Session, MenuItemConstructorOptions, MenuItem} from 'electron';
-import {Options as NewGithubIssueUrlOptions} from 'new-github-issue-url';
-import {RequireAtLeastOne} from 'type-fest';
+import {
+	AllElectron,
+	Remote,
+	BrowserWindow,
+	Size,
+	Rectangle,
+	Session,
+	MenuItemConstructorOptions,
+	MenuItem,
+} from "electron";
+import { Options as NewGithubIssueUrlOptions } from "new-github-issue-url";
+import { RequireAtLeastOne } from "type-fest";
 
 /**
 Access the Electron APIs in both the main and renderer process without having to care about which one you're in.
@@ -23,47 +33,47 @@ export const is: {
 	/**
 	Running on macOS.
 	*/
-	readonly macos: boolean,
+	readonly macos: boolean;
 
 	/**
 	Running on Linux.
 	*/
-	readonly linux: boolean,
+	readonly linux: boolean;
 
 	/**
 	Running on Windows.
 	*/
-	readonly windows: boolean,
+	readonly windows: boolean;
 
 	/**
 	Running on the [main process](https://electronjs.org/docs/tutorial/quick-start/#main-process).
 	*/
-	readonly main: boolean,
+	readonly main: boolean;
 
 	/**
 	Running on the [renderer process](https://electronjs.org/docs/tutorial/quick-start/#renderer-process).
 	*/
-	readonly renderer: boolean,
+	readonly renderer: boolean;
 
 	/**
 	The app is using [ASAR](https://electronjs.org/docs/tutorial/application-packaging/).
 	*/
-	readonly usingAsar: boolean,
+	readonly usingAsar: boolean;
 
 	/**
 	Running in development, not in production.
 	*/
-	readonly development: boolean,
+	readonly development: boolean;
 
 	/**
 	The app is an Mac App Store build.
 	*/
-	readonly macAppStore: boolean,
+	readonly macAppStore: boolean;
 
 	/**
 	The app is a Windows Store AppX build.
 	*/
-	readonly windowsStore: boolean
+	readonly windowsStore: boolean;
 };
 
 /**
@@ -93,7 +103,10 @@ interface _Choices<Macos, Windows, Linux, Default> {
 	readonly default?: Default | (() => Default);
 }
 
-export type Choices<Macos, Windows, Linux, Default> = RequireAtLeastOne<_Choices<Macos, Windows, Linux, Default>, 'macos' | 'windows' | 'linux'>
+export type Choices<Macos, Windows, Linux, Default> = RequireAtLeastOne<
+	_Choices<Macos, Windows, Linux, Default>,
+	"macos" | "windows" | "linux"
+>;
 
 /**
 Accepts an object with the keys as either `macos`, `windows`, `linux`, or `default`, and picks the appropriate key depending on the current platform.
@@ -111,7 +124,14 @@ init({
 });
 ```
 */
-export function platform<Macos = never, Windows = never, Linux = never, Default = undefined>(choices: Choices<Macos, Windows, Linux, Default>): Macos | Windows | Linux | Default;
+export function platform<
+	Macos = never,
+	Windows = never,
+	Linux = never,
+	Default = undefined
+>(
+	choices: Choices<Macos, Windows, Linux, Default>
+): Macos | Windows | Linux | Default;
 
 /**
 Returns the active window.
@@ -188,7 +208,9 @@ Get the [bounds](https://electronjs.org/docs/api/browser-window#wingetbounds) of
 
 @returns Bounds of a window.
 */
-export function getWindowBoundsCentered(options?: GetWindowBoundsCenteredOptions): Rectangle;
+export function getWindowBoundsCentered(
+	options?: GetWindowBoundsCenteredOptions
+): Rectangle;
 
 export interface OptionalRectangle {
 	/**
@@ -327,7 +349,10 @@ setContentSecurityPolicy(`
 	frame-ancestors 'none';
 `);
 */
-export function setContentSecurityPolicy(policy: string, options?: SetContentSecurityPolicyOptions): void;
+export function setContentSecurityPolicy(
+	policy: string,
+	options?: SetContentSecurityPolicyOptions
+): void;
 
 /**
 Opens the new issue view on the given GitHub repo in the browser.
@@ -347,7 +372,8 @@ openNewGitHubIssue({
 */
 export function openNewGitHubIssue(options: NewGithubIssueUrlOptions): void;
 
-export interface OpenUrlMenuItemOptions extends Readonly<MenuItemConstructorOptions> {
+export interface OpenUrlMenuItemOptions
+	extends Readonly<MenuItemConstructorOptions> {
 	/**
 	URL to be opened when the menu item is clicked.
 	*/
@@ -379,7 +405,9 @@ const menu = Menu.buildFromTemplate([
 
 Menu.setApplicationMenu(menu);
 */
-export function openUrlMenuItem(options?: OpenUrlMenuItemOptions): MenuItemConstructorOptions;
+export function openUrlMenuItem(
+	options?: OpenUrlMenuItemOptions
+): MenuItemConstructorOptions;
 
 export interface ShowAboutWindowOptions {
 	/**
@@ -468,7 +496,9 @@ const menu = Menu.buildFromTemplate([
 
 Menu.setApplicationMenu(menu);
 */
-export function aboutMenuItem(options?: AboutMenuItemOptions): MenuItemConstructorOptions;
+export function aboutMenuItem(
+	options?: AboutMenuItemOptions
+): MenuItemConstructorOptions;
 
 /**
 For example, use this in the `body` option of the `.openNewGitHubIssue()` method.
@@ -510,58 +540,58 @@ const menu = Menu.buildFromTemplate([
 Menu.setApplicationMenu(menu);
 ```
 */
-export function appMenu(menuItems?: readonly MenuItemConstructorOptions[]): MenuItemConstructorOptions;
+export function appMenu(
+	menuItems?: readonly MenuItemConstructorOptions[]
+): MenuItemConstructorOptions;
 
 export interface SystemPreferencesPanes {
 	universalaccess:
-		| 'Captioning'
-		| 'Hearing'
-		| 'Keyboard'
-		| 'Media_Descriptions'
-		| 'Mouse'
-		| 'Seeing_Display'
-		| 'Seeing_VoiceOver'
-		| 'Seeing_Zoom'
-		| 'SpeakableItems'
-		| 'Switch';
+		| "Captioning"
+		| "Hearing"
+		| "Keyboard"
+		| "Media_Descriptions"
+		| "Mouse"
+		| "Seeing_Display"
+		| "Seeing_VoiceOver"
+		| "Seeing_Zoom"
+		| "SpeakableItems"
+		| "Switch";
 	security:
-		| 'Advanced'
-		| 'FDE'
-		| 'Firewall'
-		| 'General'
-		| 'Privacy'
-		| 'Privacy_Accessibility'
-		| 'Privacy_Advertising'
+		| "Advanced"
+		| "FDE"
+		| "Firewall"
+		| "General"
+		| "Privacy"
+		| "Privacy_Accessibility"
+		| "Privacy_Advertising"
 		/**
 		Full Disk Access.
 		*/
-		| 'Privacy_AllFiles'
-		| 'Privacy_Assistive'
-		| 'Privacy_Automation'
-		| 'Privacy_Calendars'
-		| 'Privacy_Camera'
-		| 'Privacy_Contacts'
-		| 'Privacy_DesktopFolder'
-		| 'Privacy_Diagnostics'
-		| 'Privacy_DocumentsFolder'
-		| 'Privacy_DownloadsFolder'
-		| 'Privacy_LocationServices'
-		| 'Privacy_Microphone'
-		| 'Privacy_Photos'
-		| 'Privacy_Reminders'
-		| 'Privacy_ScreenCapture';
-	speech:
-		| 'Dictation'
-		| 'TTS';
+		| "Privacy_AllFiles"
+		| "Privacy_Assistive"
+		| "Privacy_Automation"
+		| "Privacy_Calendars"
+		| "Privacy_Camera"
+		| "Privacy_Contacts"
+		| "Privacy_DesktopFolder"
+		| "Privacy_Diagnostics"
+		| "Privacy_DocumentsFolder"
+		| "Privacy_DownloadsFolder"
+		| "Privacy_LocationServices"
+		| "Privacy_Microphone"
+		| "Privacy_Photos"
+		| "Privacy_Reminders"
+		| "Privacy_ScreenCapture";
+	speech: "Dictation" | "TTS";
 	sharing:
-		| 'Internet'
-		| 'Services_ARDService'
-		| 'Services_BluetoothSharing'
-		| 'Services_PersonalFileSharing'
-		| 'Services_PrinterSharing'
-		| 'Services_RemoteAppleEvent'
-		| 'Services_RemoteLogin'
-		| 'Services_ScreenSharing';
+		| "Internet"
+		| "Services_ARDService"
+		| "Services_BluetoothSharing"
+		| "Services_PersonalFileSharing"
+		| "Services_PrinterSharing"
+		| "Services_RemoteAppleEvent"
+		| "Services_RemoteLogin"
+		| "Services_ScreenSharing";
 }
 
 /**
@@ -586,4 +616,7 @@ openSystemPreferences('security', 'Firewall');
 @param section - The section within that pane.
 @returns A Promise that resolves when the preferences window is opened.
 */
-export const openSystemPreferences: <T extends keyof SystemPreferencesPanes>(pane?: T, section?: SystemPreferencesPanes[T]) => Promise<void>;
+export const openSystemPreferences: <T extends keyof SystemPreferencesPanes>(
+	pane?: T,
+	section?: SystemPreferencesPanes[T]
+) => Promise<void>;

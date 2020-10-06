@@ -33,7 +33,7 @@
 		"useful"
 	],
 	"dependencies": {
-		"electron-is-dev": "^1.1.0",
+		"electron-is-dev": "git://github.com/Jamie0/electron-is-dev",
 		"new-github-issue-url": "^0.2.1"
 	},
 	"devDependencies": {
